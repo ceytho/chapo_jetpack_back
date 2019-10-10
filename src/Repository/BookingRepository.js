@@ -12,9 +12,24 @@ module.exports = class {
             throw 'Booking object is missing information';
         }
 
+        if (!this.isAvailable(booking)) {
+            throw 'This jetpack is already booked for this time period'
+        }
+        
         this.db
             .get('bookings')
             .push(booking.toJson())
             .write()
+    }
+
+    isAvailable(booking) {
+        return this.db
+            .get('bookings')
+            .filter(
+                x => (x.jetpack_id === booking.jetpackId) &&
+                ((new Date(x.start_date) >= new Date(booking.startDate) && new Date(x.start_date) <= new Date(booking.endDate)) ||
+                (new Date(booking.startDate) >= new Date(x.start_date) && new Date(booking.startDate) <= new Date(x.end_date))))
+            .value()
+            .length == 0
     }
 };
