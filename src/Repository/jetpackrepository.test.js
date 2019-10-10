@@ -1,6 +1,20 @@
 const JetpackRepository = require('./JetpackRepository');
 const Jetpack = require('../Entity/Jetpack');
 
+describe('JetpackCreation', function() {
+    const dbMock = {
+        get : jest.fn().mockReturnThis(),
+        push : jest.fn().mockReturnThis(),
+        write : jest.fn().mockReturnThis()
+    };
+
+    const repository = new JetpackRepository(dbMock);
+    test('Create jetpack', () => {
+        repository.create(new Jetpack());
+        expect(dbMock.write.mock.calls.length).toBe(1);
+    });
+});
+
 describe('JetpackRepository list', function () {
     let jetpacks = []
 
