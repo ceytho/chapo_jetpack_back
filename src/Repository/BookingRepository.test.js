@@ -47,7 +47,7 @@ describe('BookingRepository create', function () {
     });
 });
 
-describe('BookingRepository isAvailable', function () {
+describe('BookingRepository Date functions', function () {
 
     test('Test available', () => {
 
@@ -67,5 +67,23 @@ describe('BookingRepository isAvailable', function () {
         let repository = new BookingRepository(dbMock);
 
         expect(repository.isAvailable(bookingMock)).toBe(true);
+    });
+
+    test('Test between', () => {
+        let bookingMock = {
+            jetpackId : '1',
+            startDate : '2019-01-01',
+            endDate : '2019-05-02',
+            toJson : jest.fn().mockReturnThis()
+        }
+
+        let dbMock = {
+            get : jest.fn().mockReturnThis(),
+            filter : jest.fn().mockReturnThis(),
+            value : jest.fn().mockReturnValue([bookingMock])
+        };
+
+        let repository = new BookingRepository(dbMock);
+        expect(repository.getBetween('2018-02-02','2019-05-10')).toStrictEqual([bookingMock]);
     });
 });

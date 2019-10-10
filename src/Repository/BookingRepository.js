@@ -26,9 +26,8 @@ module.exports = class {
         return this.db
             .get('bookings')
             .filter(
-                x => ((new Date(x.start_date) >= new Date(start_date) && new Date(x.start_date) <= new Date(end_date)) ||
-                (new Date(start_date) >= new Date(x.start_date) && new Date(start_date) <= new Date(x.end_date))))
-            .value()
+                x => ((new Date(x.start_date) >= new Date(start_date) && new Date(x.end_date) <= new Date(end_date))))
+            .value();
     }
 
     isAvailable(booking) {
