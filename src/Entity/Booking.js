@@ -31,9 +31,9 @@ module.exports = class {
 
     toJson() {
         return {
-            jetpackId : this.jetpackId,
-            startDate: this.startDate,
-            endDate: this.endDate
+            jetpack_id : this.jetpackId,
+            start_date: this.startDate,
+            end_date: this.endDate
         }
     }
 }
