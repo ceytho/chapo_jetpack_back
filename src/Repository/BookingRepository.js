@@ -22,6 +22,15 @@ module.exports = class {
             .write()
     }
 
+    getBetween(start_date,end_date) {
+        return this.db
+            .get('bookings')
+            .filter(
+                x => ((new Date(x.start_date) >= new Date(start_date) && new Date(x.start_date) <= new Date(end_date)) ||
+                (new Date(start_date) >= new Date(x.start_date) && new Date(start_date) <= new Date(x.end_date))))
+            .value()
+    }
+
     isAvailable(booking) {
         return this.db
             .get('bookings')
