@@ -17,4 +17,8 @@ module.exports = class {
             .push(jetpack.toJson())
             .write()
     }
+
+    getAll() {
+        return this.db.get('jetpacks');
+    }
 };
