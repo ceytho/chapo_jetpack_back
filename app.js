@@ -4,6 +4,8 @@ let app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 
+var cors = require('cors')
+app.use(cors())
 
 app
     .route('/jetpacks/:id?')
